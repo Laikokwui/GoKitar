@@ -1,14 +1,19 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import HomeScreen from '../screens/Home';
 import ScheduleScreen from '../screens/Schedule';
 import DisposeScreen from '../screens/Dispose';
 import RewardScreen from '../screens/Reward';
 import AccountScreen from '../screens/Account';
+import LoginScreen from '../screens/Login';
+import SignUpScreen from '../screens/SignUp';
+import InitialScreen from '../screens/InitialScreen';
 
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 import { GestureResponderEvent } from 'react-native';
 
@@ -25,31 +30,42 @@ function CustomTabBarButton({ children, onPress }: { children: React.ReactNode, 
   );
 }
 
+function MainTabs() {
+  return (
+    <Tab.Navigator
+      screenOptions={{
+        tabBarShowLabel: false,
+        tabBarStyle: styles.tabBar,
+      }}
+    >
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Schedule" component={ScheduleScreen} />
+      <Tab.Screen
+        name="Dispose"
+        component={DisposeScreen}
+        options={{
+          tabBarButton: (props) => (
+            <CustomTabBarButton {...props}>
+              <Text style={styles.disposeText}>Dispose</Text>
+            </CustomTabBarButton>
+          ),
+        }}
+      />
+      <Tab.Screen name="Reward" component={RewardScreen} />
+      <Tab.Screen name="Account" component={AccountScreen} />
+    </Tab.Navigator>
+  );
+}
+
 export default function BottomNav() {
   return (
     <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={{
-          tabBarShowLabel: false,
-          tabBarStyle: styles.tabBar,
-        }}
-      >
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Schedule" component={ScheduleScreen} />
-        <Tab.Screen
-          name="Dispose"
-          component={DisposeScreen}
-          options={{
-            tabBarButton: (props) => (
-              <CustomTabBarButton {...props}>
-                <Text style={styles.disposeText}>Dispose</Text>
-              </CustomTabBarButton>
-            ),
-          }}
-        />
-        <Tab.Screen name="Reward" component={RewardScreen} />
-        <Tab.Screen name="Account" component={AccountScreen} />
-      </Tab.Navigator>
+      <Stack.Navigator>
+        <Stack.Screen name="Initial" component={InitialScreen} />
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="SignUp" component={SignUpScreen} />
+        <Stack.Screen name="MainTabs" component={MainTabs} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }
