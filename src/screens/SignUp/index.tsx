@@ -1,14 +1,52 @@
 import * as React from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import { Input } from '../../components/ui/input';
+import { Button } from '../../components/ui/button';
 
 export default function SignUpScreen() {
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [confirmPassword, setConfirmPassword] = React.useState('');
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Sign Up</Text>
-      <TextInput style={styles.input} placeholder="Email" />
-      <TextInput style={styles.input} placeholder="Password" secureTextEntry />
-      <TextInput style={styles.input} placeholder="Confirm Password" secureTextEntry />
-      <Button title="Sign Up" onPress={() => {}} />
+      <View style={styles.content}>
+        <Text style={styles.title}>Create account</Text>
+        <Text style={styles.subtitle}>Enter your details to get started</Text>
+        
+        <Input
+          label="Email"
+          placeholder="Enter your email"
+          value={email}
+          onChangeText={setEmail}
+          keyboardType="email-address"
+          autoCapitalize="none"
+        />
+        
+        <Input
+          label="Password"
+          placeholder="Create a password"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+        />
+        
+        <Input
+          label="Confirm Password"
+          placeholder="Confirm your password"
+          value={confirmPassword}
+          onChangeText={setConfirmPassword}
+          secureTextEntry
+        />
+        
+        <Button onPress={() => {}}>
+          Create account
+        </Button>
+        
+        <Button variant="secondary" onPress={() => {}} style={styles.secondaryButton}>
+          Already have an account?
+        </Button>
+      </View>
     </View>
   );
 }
@@ -16,19 +54,25 @@ export default function SignUpScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#f8f9fa',
+  },
+  content: {
+    flex: 1,
     justifyContent: 'center',
-    padding: 16,
+    padding: 24,
   },
   title: {
-    fontSize: 24,
-    marginBottom: 16,
-    textAlign: 'center',
+    fontSize: 32,
+    fontWeight: '700',
+    marginBottom: 8,
+    color: '#111',
   },
-  input: {
-    height: 40,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    marginBottom: 12,
-    paddingHorizontal: 8,
+  subtitle: {
+    fontSize: 16,
+    color: '#666',
+    marginBottom: 32,
+  },
+  secondaryButton: {
+    marginTop: 12,
   },
 });

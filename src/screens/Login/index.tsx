@@ -1,13 +1,53 @@
 import * as React from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Alert } from 'react-native';
+import { Input } from '../../components/ui/input';
+import { Button } from '../../components/ui/button';
+import { useNavigation } from '@react-navigation/native';
 
 export default function LoginScreen() {
+  const navigation = useNavigation<any>();
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  const handleLogin = () => {
+    if (!email || !password) {
+      Alert.alert('Error', 'Please fill in all fields');
+      return;
+    }
+    navigation.navigate('OTP');
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
-      <TextInput style={styles.input} placeholder="Email" />
-      <TextInput style={styles.input} placeholder="Password" secureTextEntry />
-      <Button title="Login" onPress={() => {}} />
+      <View style={styles.content}>
+        <Text style={styles.title}>Welcome back</Text>
+        <Text style={styles.subtitle}>Enter your credentials to continue</Text>
+        
+        <Input
+          label="Email"
+          placeholder="Enter your email"
+          value={email}
+          onChangeText={setEmail}
+          keyboardType="email-address"
+          autoCapitalize="none"
+        />
+        
+        <Input
+          label="Password"
+          placeholder="Enter your password"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+        />
+        
+        <Button trigger={()=>handleLogin()}>
+          Sign in
+        </Button>
+        
+        <Button variant="secondary" trigger={() => navigation.navigate('SignUp')} style={styles.secondaryButton}>
+          Create account
+        </Button>
+      </View>
     </View>
   );
 }
@@ -15,19 +55,25 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#f8f9fa',
+  },
+  content: {
+    flex: 1,
     justifyContent: 'center',
-    padding: 16,
+    padding: 24,
   },
   title: {
-    fontSize: 24,
-    marginBottom: 16,
-    textAlign: 'center',
+    fontSize: 32,
+    fontWeight: '700',
+    marginBottom: 8,
+    color: '#111',
   },
-  input: {
-    height: 40,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    marginBottom: 12,
-    paddingHorizontal: 8,
+  subtitle: {
+    fontSize: 16,
+    color: '#666',
+    marginBottom: 32,
+  },
+  secondaryButton: {
+    marginTop: 12,
   },
 });

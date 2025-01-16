@@ -1,15 +1,23 @@
 import * as React from 'react';
 import { View, ActivityIndicator, StyleSheet } from 'react-native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-import { NavigationProp } from '@react-navigation/native';
+type RootStackParamList = {
+  MainApp: undefined;
+  Login: undefined;
+};
 
-export default function InitialScreen({ navigation }: { navigation: NavigationProp<any> }) {
+type InitialScreenProps = {
+  navigation: NativeStackNavigationProp<RootStackParamList>;
+};
+
+export default function InitialScreen({ navigation }: InitialScreenProps) {
   React.useEffect(() => {
     // Simulate an authentication check
     const isAuthenticated = false; // Replace with actual authentication logic
 
     if (isAuthenticated) {
-      navigation.navigate('MainTabs');
+      navigation.navigate('MainApp');
     } else {
       navigation.navigate('Login');
     }
