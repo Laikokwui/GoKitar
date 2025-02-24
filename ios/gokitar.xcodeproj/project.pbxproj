@@ -474,6 +474,7 @@
 				DEVELOPMENT_TEAM = B94U8BGPYK;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = gokitar/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = GoKitar;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -504,6 +505,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B94U8BGPYK;
 				INFOPLIST_FILE = gokitar/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = GoKitar;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
